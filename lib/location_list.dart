@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/app.dart';
+import 'location_detail.dart';
 import 'models/location.dart';
 import 'styles.dart';
 
@@ -19,14 +20,29 @@ class LocationList extends StatelessWidget {
       ),
       body: ListView.builder(
         itemCount: locations.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            leading: _itemThumbnail(locations[index]),
-            title: _itemTitle(locations[index]),
-          );
-        },
+        itemBuilder: _listViewItemBuilder,
       ),
     );
+  }
+
+  Widget _listViewItemBuilder(BuildContext context, int index) {
+    var location = locations[index];
+    return ListTile(
+      contentPadding: const EdgeInsets.all(10.0),
+      leading: _itemThumbnail(location),
+      title: _itemTitle(location),
+      onTap: () {
+        _navigateToLocationDetail(context, index);
+      },
+    );
+  }
+
+  void _navigateToLocationDetail(BuildContext context, int locationID) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => LocationDetail(locationID: locationID),
+        ));
   }
 
   Widget _itemThumbnail(Location location) {
@@ -37,6 +53,9 @@ class LocationList extends StatelessWidget {
   }
 
   Widget _itemTitle(Location location) {
-    return Text(location.name);
+    return Text(
+      location.name,
+      style: Styles.textDefault,
+    );
   }
 }

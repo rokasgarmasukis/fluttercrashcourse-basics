@@ -73,11 +73,16 @@ mixin MockLocation implements Location {
                   'Kyoto airport, with several terminals, is located 16 kilometres south of the city and is also known as Kyoto. Kyoto can also be reached by transport links from other regional airports.')
         ]),
   ];
+
   static Location fetchAny() {
     return items[0];
   }
 
   static List<Location> fetchAll() {
     return items;
+  }
+
+  static Location fetch(int id) {
+    return items[id];
   }
 }

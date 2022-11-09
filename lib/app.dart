@@ -6,13 +6,14 @@ import './mocks/mock_location.dart';
 
 class App extends StatelessWidget {
   final Location mockLocation = MockLocation.fetchAny();
+  final List<Location> mockLocations = MockLocation.fetchAll();
 
   App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: LocationList(locations: []),
+    return MaterialApp(
+      home: LocationList(locations: mockLocations),
     );
   }
 }
